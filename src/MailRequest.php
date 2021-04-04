@@ -4,6 +4,8 @@
 namespace MattSplat\SmtpCapture;
 
 
+use PhpMimeMailParser\Parser;
+
 class MailRequest
 {
     public $from = "";
@@ -23,7 +25,7 @@ class MailRequest
 
     public function parse() : MailRequest
     {
-        $parser = new \PhpMimeMailParser\Parser();
+        $parser = new Parser();
         $parser->setText($this->raw);
         $this->html = $parser->getMessageBody('html');
         $this->body = $parser->getMessageBody('text');
@@ -40,6 +42,11 @@ class MailRequest
     {
         $this->raw .= $line;
         return $this;
+    }
+
+    public function getContent()
+    {
+        return $this->html !== "" ? $this->html : $this->body;
     }
 
 
