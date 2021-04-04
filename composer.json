@@ -1,5 +1,5 @@
 {
-    "name": "matt/smtp-capture",
+    "name": "mattsplat/smtp-capture",
     "license": "MIT",
     "description": "Package to listen and intercept emails",
     "keywords": ["SMTP", "email", "mail trap"],
