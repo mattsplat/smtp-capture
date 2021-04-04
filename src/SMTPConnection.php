@@ -12,6 +12,7 @@ class SMTPConnection implements MessageComponentInterface
     protected $clients;
     protected $mail_requests = [];
     protected $onComplete;
+    protected $logData;
 
     const EHLO = "EHLO";
     const HELO = "HELO";
@@ -21,10 +22,11 @@ class SMTPConnection implements MessageComponentInterface
     const QUIT = "QUIT";
     const STARTTLS = "STARTTLS";
 
-    public function __construct(?\Closure $onComplete = null)
+    public function __construct(?\Closure $onComplete = null, bool $logData = false)
     {
         $this->clients = new \SplObjectStorage;
         $this->onComplete = $onComplete;
+        $this->logData = $logData;
     }
 
     public function onOpen(ConnectionInterface $conn)
@@ -41,7 +43,9 @@ class SMTPConnection implements MessageComponentInterface
     {
         $this->mail_requests[$connection->resourceId]->appendRaw($data);
 
-        file_put_contents('./email.log', $data . "\n---------------\n", FILE_APPEND);
+        if($this->logData) {
+            file_put_contents('./email.log', $data . "\n", FILE_APPEND);
+        }
 
         $line_end = "\r\n";
         $terminate_by = '.';
@@ -81,10 +85,6 @@ class SMTPConnection implements MessageComponentInterface
                 }
         }
 
-        // Send data to client
-//        echo "prefix $prefix###\n";
-//        echo $data. "\n";
-//        echo "###\n";
         if ($response) {
             echo "sending response : $response";
             $connection->send($response);

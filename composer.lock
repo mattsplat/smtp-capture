@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c571eeab0e163dd03452584bd990d50a",
+    "content-hash": "830613f3825a9060881cf9f49a0daabd",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -337,6 +337,97 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.8.1"
             },
             "time": "2021-03-21T16:25:00+00:00"
+        },
+        {
+            "name": "php-mime-mail-parser/php-mime-mail-parser",
+            "version": "7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-mime-mail-parser/php-mime-mail-parser.git",
+                "reference": "9d09a017f3f103fec8456211a4a538b80e0eca0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-mime-mail-parser/php-mime-mail-parser/zipball/9d09a017f3f103fec8456211a4a538b80e0eca0d",
+                "reference": "9d09a017f3f103fec8456211a4a538b80e0eca0d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mailparse": "*",
+                "php": "^7.2|^8.0"
+            },
+            "replace": {
+                "exorus/php-mime-mail-parser": "*",
+                "messaged/php-mime-mail-parser": "*"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpunit/phpunit": "^8.0",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpMimeMailParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "eXorus",
+                    "email": "exorus.spam@gmail.com",
+                    "homepage": "https://github.com/eXorus/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "M.Valinskis",
+                    "email": "M.Valins@gmail.com",
+                    "homepage": "https://code.google.com/p/php-mime-mail-parser",
+                    "role": "Developer"
+                },
+                {
+                    "name": "eugene.emmett.wood",
+                    "email": "gene_w@cementhorizon.com",
+                    "homepage": "https://code.google.com/p/php-mime-mail-parser",
+                    "role": "Developer"
+                },
+                {
+                    "name": "alknetso",
+                    "email": "alkne@gmail.com",
+                    "homepage": "https://code.google.com/p/php-mime-mail-parser",
+                    "role": "Developer"
+                },
+                {
+                    "name": "bucabay",
+                    "email": "gabe@fijiwebdesign.com",
+                    "homepage": "http://www.fijiwebdesign.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A fully tested email parser for PHP 7.2+ (mailparse extension wrapper).",
+            "homepage": "https://github.com/php-mime-mail-parser/php-mime-mail-parser",
+            "keywords": [
+                "MimeMailParser",
+                "mail",
+                "mailparse",
+                "mime",
+                "parser",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/php-mime-mail-parser/php-mime-mail-parser/issues",
+                "source": "https://github.com/php-mime-mail-parser/php-mime-mail-parser/tree/7.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/eXorus",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-25T17:21:57+00:00"
         },
         {
             "name": "psr/http-message",
@@ -1729,59 +1820,6 @@
                 }
             ],
             "time": "2021-03-14T13:53:33+00:00"
-        },
-        {
-            "name": "workerman/workerman",
-            "version": "v4.0.19",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/walkor/Workerman.git",
-                "reference": "af6025976fba817eeb4d5fbf8d0c1059a5819da3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/walkor/Workerman/zipball/af6025976fba817eeb4d5fbf8d0c1059a5819da3",
-                "reference": "af6025976fba817eeb4d5fbf8d0c1059a5819da3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "suggest": {
-                "ext-event": "For better performance. "
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Workerman\\": "./"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "walkor",
-                    "email": "walkor@workerman.net",
-                    "homepage": "http://www.workerman.net",
-                    "role": "Developer"
-                }
-            ],
-            "description": "An asynchronous event driven PHP framework for easily building fast, scalable network applications.",
-            "homepage": "http://www.workerman.net",
-            "keywords": [
-                "asynchronous",
-                "event-loop"
-            ],
-            "support": {
-                "email": "walkor@workerman.net",
-                "forum": "http://wenda.workerman.net/",
-                "issues": "https://github.com/walkor/workerman/issues",
-                "source": "https://github.com/walkor/workerman",
-                "wiki": "http://doc.workerman.net/"
-            },
-            "time": "2021-03-05T06:44:28+00:00"
         }
     ],
     "packages-dev": [],

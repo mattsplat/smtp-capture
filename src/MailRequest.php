@@ -25,16 +25,14 @@ class MailRequest
 
     public function parse() : MailRequest
     {
-        $start_html_tag = "<!DOCTYPE";
-        $parts = explode($start_html_tag, $this->raw);
-        $this->html = $start_html_tag. $parts[1];
-        $this->html = preg_replace('/=\n/', '', $this->html);
-        $this->html = preg_replace('/=3D/', '=', $this->html);
-        $this->html = preg_replace('/\.\.(\w)/', '.$1', $this->html);
+        $parser = new \PhpMimeMailParser\Parser();
+        $parser->setText($this->raw);
+        $this->html = $parser->getMessageBody('html');
 
-        foreach(explode('\n', $parts[0] ) as $line) {
-            $this->addAttributeLine($line);
-        }
+        $this->to = $parser->getAddresses('to');
+        $this->to = $parser->getAddresses('from');
+
+        $this->subject =  $parser->getSubject();
         return $this;
     }
 
@@ -50,27 +48,5 @@ class MailRequest
         return $this;
     }
 
-    private function addAttributeLine(string $line)
-    {
-
-        $prefix = strtok(trim($line), ":");
-        $value = explode(': ', $line)[1] ?? "";
-
-        switch($prefix) {
-            case 'Subject':
-                $this->subject = $value;
-                break;
-            case "From":
-                preg_match('/\<([\w\d@.\-\*]+)>/', $value, $matches);
-                $this->from[] = $matches[1] ?? "";
-                $this->from_name = strtok($value, ' ');
-                break;
-            case "To":
-                $this->to[] = $value;
-                break;
-            default:
-        }
-
-    }
 
 }
