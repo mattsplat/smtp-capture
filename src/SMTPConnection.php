@@ -46,7 +46,7 @@ class SMTPConnection implements MessageComponentInterface
         $line_end = "\r\n";
         $terminate_by = '.';
         $response = null;
-        $prefix = strtok(trim($data), " ");//substr(trim($data), 0, 4);
+        $prefix = strtok(trim($data), " ");
 
         switch ($prefix) {
             case self::STARTTLS:
@@ -97,6 +97,7 @@ class SMTPConnection implements MessageComponentInterface
         $this->clients->detach($conn);
         if (isset($this->mail_requests[$conn->resourceId])) {
             if ($this->onComplete !== null && is_callable($this->onComplete)) {
+                $this->mail_requests[$conn->resourceId]->parse();
                 ($this->onComplete)($this->mail_requests[$conn->resourceId]);
             }
             unset($this->mail_requests[$conn->resourceId]);
@@ -114,14 +115,5 @@ class SMTPConnection implements MessageComponentInterface
         $conn->close();
     }
 
-    private function addAttributeLine(string $line, MailRequest $mail_request)
-    {
-        $prefix = substr($line, 0, 4);
-        preg_match('/\<([\w\d@.\-\*]+)>/', $line, $matches);
-        if ($prefix === self::RCPT && isset($matches[1])) {
-            $mail_request->to[] = $matches[1];
-        } elseif ($prefix === self::MAIL) {
-            $mail_request->from = $matches[1] ?? "";
-        }
-    }
+
 }
