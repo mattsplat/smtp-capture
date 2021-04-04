@@ -1,0 +1,12 @@
+{
+    "name": "matt/smtp-capture",
+    "require": {
+        "swiftmailer/swiftmailer": "^6.0",
+        "cboden/ratchet": "^0.4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    }
+}
