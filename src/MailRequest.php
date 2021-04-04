@@ -7,7 +7,6 @@ namespace App;
 class MailRequest
 {
     public $from = "";
-    public $from_name = "";
     public $to = [];
     public $bcc = [];
     public $cc = [];
@@ -15,7 +14,6 @@ class MailRequest
     public $body = "";
     public $subject = "";
 
-    public $data = "";
     public $raw = "";
     public $html = "";
 
@@ -28,19 +26,15 @@ class MailRequest
         $parser = new \PhpMimeMailParser\Parser();
         $parser->setText($this->raw);
         $this->html = $parser->getMessageBody('html');
+        $this->body = $parser->getMessageBody('text');
 
         $this->to = $parser->getAddresses('to');
         $this->to = $parser->getAddresses('from');
 
-        $this->subject =  $parser->getSubject();
+        $this->subject =  $parser->getHeader('subject');
         return $this;
     }
 
-    public function appendData(string $line) : MailRequest
-    {
-        $this->data .= $line;
-        return $this;
-    }
 
     public function appendRaw(string $line) : MailRequest
     {

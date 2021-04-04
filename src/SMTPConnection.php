@@ -41,7 +41,6 @@ class SMTPConnection implements MessageComponentInterface
 
     public function onMessage(ConnectionInterface $connection, $data)
     {
-        $this->mail_requests[$connection->resourceId]->appendRaw($data);
 
         if($this->logData) {
             file_put_contents('./email.log', $data . "\n", FILE_APPEND);
@@ -61,7 +60,8 @@ class SMTPConnection implements MessageComponentInterface
             case self::RCPT:
             case self::MAIL:
                 $response = "250 ok" . $line_end;
-                break;
+                $this->mail_requests[$connection->resourceId]->appendRaw($data);
+            break;
             case self::DATA:
                 $response = "354 End data with <CR><LF>.<CR><LF>" . $line_end;
                 break;
@@ -80,9 +80,9 @@ class SMTPConnection implements MessageComponentInterface
                 $last_line = trim($last_line[array_key_last($last_line)]);
                 if ($stripped === '.' || $last_line === '.') {
                     $response = "250 2.6.0 Message accepted" . $line_end . $line_end;
-                } else {
-                    $this->mail_requests[$connection->resourceId]->appendData($data);
                 }
+                $this->mail_requests[$connection->resourceId]->appendRaw($data);
+
         }
 
         if ($response) {
