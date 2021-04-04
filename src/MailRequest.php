@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace MattSplat\SmtpCapture;
 
 
 class MailRequest

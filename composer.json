@@ -1,13 +1,19 @@
 {
     "name": "matt/smtp-capture",
+    "license": "MIT",
+    "description": "Package to listen and intercept emails",
+    "keywords": ["SMTP", "email", "mail trap"],
     "require": {
-        "swiftmailer/swiftmailer": "^6.0",
         "cboden/ratchet": "^0.4.3",
         "php-mime-mail-parser/php-mime-mail-parser": "^7.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3",
+        "swiftmailer/swiftmailer": "^6.0"
+    },
     "autoload": {
         "psr-4": {
-            "App\\": "src"
+            "MattSplat\\SmtpCapture\\": "src"
         }
     }
 }
