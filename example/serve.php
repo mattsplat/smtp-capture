@@ -8,7 +8,12 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $callback = function (MailRequest $request) {
     $filename = md5(random_bytes(10)) . '.html';
-    file_put_contents($filename, $request->getContent());
+    file_put_contents($filename, var_export([
+        'to'=>$request->to,
+        'from' => $request->from,
+        'subject' => $request->subject,
+        'cc' => $request->cc,
+    ], 1));
 };
 
 $server = IoServer::factory(

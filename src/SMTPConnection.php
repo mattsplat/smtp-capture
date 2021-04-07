@@ -63,7 +63,7 @@ class SMTPConnection implements MessageComponentInterface
                 $this->mail_requests[$connection->resourceId]->appendRaw($data);
             break;
             case self::DATA:
-                $response = "354 End data with <CR><LF>.<CR><LF>" . $line_end;
+                $response = "354 End data with <CR><LF>$terminate_by<CR><LF>" . $line_end;
                 break;
             case self::QUIT:
                 $response = "221 Bye Felicia" . $line_end;
@@ -78,7 +78,7 @@ class SMTPConnection implements MessageComponentInterface
                 $stripped = trim(preg_replace(['/--_=[\w\d_]*=_--/', "/\n/"], '', trim($data)));
                 $last_line = array_filter(explode("\n", $data));
                 $last_line = trim($last_line[array_key_last($last_line)]);
-                if ($stripped === '.' || $last_line === '.') {
+                if ($stripped === $terminate_by || $last_line === $terminate_by) {
                     $response = "250 2.6.0 Message accepted" . $line_end . $line_end;
                 }
                 $this->mail_requests[$connection->resourceId]->appendRaw($data);

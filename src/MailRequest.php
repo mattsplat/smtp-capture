@@ -8,15 +8,48 @@ use PhpMimeMailParser\Parser;
 
 class MailRequest
 {
-    public $from = "";
+
+    /**
+     * @var array
+     * [
+        0 =>
+            [
+                'display' => 'John Doe',
+                'address' => 'john@doe.com',
+                'is_group' => false,
+            ],
+        ],
+     */
+    public $from = [];
+
+    /**
+     * @var array
+     */
     public $to = [];
-    public $bcc = [];
+
+    /**
+     * @var array
+     */
     public $cc = [];
 
+    /**
+     * @var string
+     */
     public $body = "";
+
+    /**
+     * @var string
+     */
     public $subject = "";
 
+    /**
+     * @var string
+     */
     public $raw = "";
+
+    /**
+     * @var string
+     */
     public $html = "";
 
     public function __construct()
@@ -31,7 +64,8 @@ class MailRequest
         $this->body = $parser->getMessageBody('text');
 
         $this->to = $parser->getAddresses('to');
-        $this->to = $parser->getAddresses('from');
+        $this->from = $parser->getAddresses('from');
+        $this->cc = $parser->getAddresses('cc');
 
         $this->subject =  $parser->getHeader('subject');
         return $this;
